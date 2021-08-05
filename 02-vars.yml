@@ -42,19 +42,16 @@
     - name: Run uptime command
       ansible.builtin.shell: uptime
       register: out
-    - name: Print output
-      debug:
-        msg: "{{out.stdout}}"
 
-- name: Demo on set fact
-  hosts: all
-  tasks:
     - name: set a variable
       ansible.builtin.set_fact:
-      UPTIME: "{{out.stdout}}"
-    - name: set a variable
+        UPTIME: "{{out.stdout}}"
+
+    - name: Print output
       debug:
         msg: "{{UPTIME}}"
+
+
 
 
 
