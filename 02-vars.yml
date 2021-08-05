@@ -1,4 +1,4 @@
-- name: Demo on variables
+- name: Demo on variables    #play level variables
   hosts: all
   vars:
     URL: google.com
@@ -6,4 +6,9 @@
     - name: Print a variable
       debug:
         msg: "URL = {{URL}}"
+    - name: Print task variable
+      debug:
+        msg: "URL = {{URL}}"
+      vars:
+        URL: yahoo.com
 
