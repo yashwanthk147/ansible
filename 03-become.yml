@@ -1,0 +1,9 @@
+- name: Install a package
+  hosts: all
+  tasks:
+    - name: Install nodjs
+      debug:
+        name: nodejs
+        status: present
+
+
