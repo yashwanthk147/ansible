@@ -1,7 +1,7 @@
 - name: Demo on variables    #play level variables
   hosts: all
   vars:
-    URL: google.com
+    URL: play.google.com
   tasks:
     - name: Print a variable
       debug:
@@ -10,5 +10,5 @@
       debug:
         msg: "URL = {{URL}}"
       vars:
-        URL: yahoo.com
+        URL: task.yahoo.com
 
