@@ -12,3 +12,10 @@
       vars:
         URL: task.yahoo.com
 
+- name: Demo on Inventory variables    #Inventory level variables
+  hosts: all
+  tasks:
+    - name: Print a variable
+      debug:
+        msg: "URL = {{URL}}"
+
