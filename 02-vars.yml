@@ -44,7 +44,7 @@
       register: out
     - name: Print output
       debug:
-        msg: "{{out}}"
+        msg: "{{out.stdout}}"
 
 
 
