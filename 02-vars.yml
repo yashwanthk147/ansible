@@ -51,6 +51,10 @@
       debug:
         msg: "{{UPTIME}}"
 
+- name: Demo on roles
+  hosts: all
+  roles:
+    - name: demo
 
 
 
