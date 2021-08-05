@@ -46,5 +46,15 @@
       debug:
         msg: "{{out.stdout}}"
 
+- name: Demo on set fact
+  hosts: all
+  tasks:
+    - name: set a variable
+      ansible.builtin.set_fact:
+      UPTIME: "{{out.stdout}}"
+    - name: set a variable
+      debug:
+        msg: "{{UPTIME}}"
+
 
 
