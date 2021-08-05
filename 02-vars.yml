@@ -19,3 +19,11 @@
       debug:
         msg: "URL = {{URL}}"
 
+- name: Demo on variables for file    #variables for file
+  hosts: all
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Print a variable
+      debug:
+        msg: "URL = {{URL}}"
