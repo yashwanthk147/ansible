@@ -1,4 +1,4 @@
-- name: Demmo variables
+- name: Demo on variables
   hosts: all
      vars: URL:google.com
   tasks:
