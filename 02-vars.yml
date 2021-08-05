@@ -21,9 +21,18 @@
 
 - name: Demo on File variables    #variables for file
   hosts: all
+  gather_facts: no
   vars_files:
     - vars.yml
   tasks:
     - name: Print a variable
       debug:
         msg: "URL = {{URL}}"
+
+- name: Demo on Facts    #demo on facts
+  hosts: all
+  tasks:
+    - name: Print a variable
+      debug:
+        msg: "Hostname = {{ansible_fqdn}}"
+
