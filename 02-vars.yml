@@ -12,7 +12,7 @@
       vars:
         URL: task.yahoo.com
 
-- name: Demo on Inventory variables    #Inventory level variables
+- name: Demo on Inv variables    #Inventory level variables
   hosts: all
   tasks:
     - name: Print a variable
