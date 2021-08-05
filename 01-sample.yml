@@ -1,12 +1,12 @@
 - name: Sample Play 1
-  hosts: 172.31.69.249
+  hosts: all
   tasks:
     - name: Print Hello
       ansible.builtin.debug:
         msg: Hello
 
 - name: Sample Play 2
-  hosts: 172.31.69.249
+  hosts: all
   tasks:
     - name: Print Bye
       ansible.builtin.debug:
