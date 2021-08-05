@@ -2,6 +2,7 @@
   hosts: all
      vars: URL:google.com
   tasks:
-      -name: Print a variable
+    - name: Print a variable
       debug:
         msg: "URL={{URL}}"
+
