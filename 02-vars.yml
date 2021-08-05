@@ -1,9 +1,9 @@
 - name: Demo on variables
   hosts: all
-     vars:
-       URL: google.com
+  vars:
+    URL: google.com
   tasks:
     - name: Print a variable
       debug:
-        msg: "URL={{URL}}"
+        msg: "URL = {{URL}}"
 
