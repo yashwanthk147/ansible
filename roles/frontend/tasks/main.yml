@@ -25,10 +25,10 @@
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
 
-- name: Restart Nginx Service
+- name: start Nginx Service
   systemd:
     name: nginx
-    state: restarted
+    state: started
     enabled: yes
 
 
