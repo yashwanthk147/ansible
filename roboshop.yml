@@ -4,9 +4,9 @@
   roles:
     - name: frontend
 
-- name: Roboshop Mongodb Setup
-  hosts: MONGODB
-  become: yes
-  roles:
-    - name: frontend
-
+#- name: Roboshop Mongodb Setup
+#  hosts: MONGODB
+#  become: yes
+#  roles:
+#    - name: frontend
+#
