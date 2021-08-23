@@ -11,11 +11,11 @@
 - name: Download and Unarchive Frontend Content
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
-    dest: /usr/share/nginx
+    dest: /tmp
     remote_src: yes
 
 - name: Copy the extracted content
   copy:
-    src: /tmp/frontend-main/static
-    dest: /usr/share/nginx
+    src: /tmp/frontend-main/static/
+    dest: /usr/share/nginx/
     remote_src: yes
