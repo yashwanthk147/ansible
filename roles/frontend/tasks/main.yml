@@ -19,3 +19,16 @@
     src: /tmp/frontend-main/static/
     dest: /usr/share/nginx/
     remote_src: yes
+
+- name: Copy roboshop configure
+  copy:
+    src: roboshop.conf
+    dest:
+
+- name: Restart Nginx Service
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+
+
