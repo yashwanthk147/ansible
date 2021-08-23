@@ -1,10 +1,10 @@
 - name: Install nginx
-  ansible.buitin.yum:
+  ansible.builtin.yum:
     name: nginx
     state: installed
 
 - name: Remove old Content
-  ansible.buitin.file:
+  ansible.builtin.file:
     path: /usr/share/nginx/html
     state: absent
 
