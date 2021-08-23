@@ -23,6 +23,6 @@ locals {
 }
 
 resource "local_file" "foo" {
-  content     = "[FRONTEND]\n${aws_instance.instance.*.private_ip[9]}"
+  content     = "[]\n${aws_instance.instance.*.private_ip[9]}"
   filename = "/tmp/inv-roboshop"
 }
