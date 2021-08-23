@@ -2,3 +2,14 @@
   ansible.buitin.yum:
     name: nginx
     state: installed
+
+- name: Remove old Content
+  ansible.buitin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+- name: Download and Unarchive Frontend Content
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
+    dest: /usr/share/nginx
+    remote_src: yes
