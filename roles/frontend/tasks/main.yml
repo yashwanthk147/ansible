@@ -13,3 +13,9 @@
     src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
     dest: /usr/share/nginx
     remote_src: yes
+
+- name: Copy the extracted content
+  copy:
+    src: /tmp/frontend-main/static
+    dest: /usr/share/nginx
+    remote_src: yes
