@@ -17,7 +17,7 @@
 - name: Copy the extracted content
   copy:
     src: /tmp/frontend-main/static/
-    dest: /usr/share/nginx/
+    dest: /usr/share/nginx/html/
     remote_src: yes
 
 - name: Copy roboshop configure
