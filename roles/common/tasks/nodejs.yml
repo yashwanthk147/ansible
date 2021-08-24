@@ -16,8 +16,10 @@
     src: /tmp/catalogue-main/
     dest: /home/roboshop/catalogue/
     remote_src: yes
-     owner: roboshop   #root directory has to be set with permissions of roboshop user
+     owner: roboshop
      group: roboshop
+#root directory has to be set with permissions of roboshop user
+
 
 #npm install should be running as roboshopuser, Now i'm root user and become a roboshop user and seup these
 - name: Install catalogue Dependencies
