@@ -14,51 +14,44 @@
     state: started
     enabled: yes
 
-- name: Check the default Password
-  shell: echo "show databases;" | mysql -uroot -pRoboShop@1
+- name: Check the default password
+  community.mysql.mysql_query:
+    query: show databases
+    login_password: RoboShop@1
+    login_user: root
   register: default_mysql_check
   ignore_errors: yes
 
+#- name: Check the default password
+#  shell: echo "show databases;" | mysql -uroot -pRoboShop@1
+#  register: default_mysql_check
+#  ignore_errors: yes
+
 - name: Grab default password
+  when: default_mysql_check.failed
   shell: grep 'A temporary password' /var/log/mysqld.log  | awk '{print $NF}'
   register: out
 
+- name: Reset MySQL Password
+  when: default_mysql_check.failed
+  shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p"{{out.stdout}}"
 
+- name: Uninstall Validate Password Plugin
+  community.mysql.mysql_query:
+    query: uninstall plugin validate_password
+    login_password: RoboShop@1
+    login_user: root
+  ignore_errors: yes
 
-#Setup MySQL Repo
-#    # echo '' > /etc/yum.repos.d/mysql.repo
-#
-#    Install MySQL
-#    # yum install mysql-community-server -y
-#
-#    Start MySQL.
-#    # systemctl enable mysqld
-#    # systemctl start mysqld
-#
-#    Now a default root password will be generated and given in the log file.
-#    # grep temp /var/log/mysqld.log
-#
-#    Next, We need to change the default root password in order to start using the database service.
-#    # mysql_secure_installation
-#
-#    You can check the new password working or not using the following command.
+- name: Download and Extract Frontend content
+  include_role:
+    name: common
+    tasks_from: download
 
-#    # mysql -u root -p
-#
-#    Run the following SQL commands to remove the password policy.
-#    > uninstall plugin validate_password;
-#    Setup Needed for Application.
-#    As per the architecture diagram, MySQL is needed by
-#
-#    Shipping Service
-#    So we need to load that schema into the database, So those applications will detect them and run accordingly.
-#
-#    To download schema, Use the following command
-
-#    # curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
-#    Load the schema for Services.
-#
-#    # cd /tmp
-#    # unzip mysql.zip
-#    # cd mysql-main
-#  # mysql -uroot -pRoboShop@1 <shipping.sql
+- name: Load Schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /tmp/mysql-main/shipping.sql
+    login_user: root
+    login_password: RoboShop@1
