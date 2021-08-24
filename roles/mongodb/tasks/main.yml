@@ -15,8 +15,9 @@
     replace: '0.0.0.0'
 
 - name: Start MongoDB service
-  systemd: mongod
-    name: started
+  systemd:
+    name: mongod
+    state: started
 
 - name: Download and Extract MongoDB schema
   ansible.builtin.unarchive:
