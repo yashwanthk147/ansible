@@ -3,34 +3,34 @@
     src: mongo.repo
     dest: /etc/yum.repos.d/mongodb.repo
 
+- name: Install MongoDB
+  yum:
+    name: mongodb-org
+    state: present
+
+- name: Update MongoDB Listen Address
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Start MongoDB service
+  systemd: mongodb
+    name: started
+
+- name: Download and Extract MongoDB schema
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/mongodb/archive/main.zip
+    dest: /tmp
+    remote_src: yes
 
 
+- name: Load schema - catalogue
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/catalogue.js"
+    idempotent: yes
 
-
-Setup MongoDB repos.
-    echo '[mongodb-org-4.2]
-    name=MongoDB Repository
-    baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
-    gpgcheck=1
-    enabled=1
-    gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mongodb.repo
-    Install Mongo & Start Service.
-    # yum install -y mongodb-org
-    # systemctl enable mongod
-    # systemctl start mongod
-    Update Liste IP address from 127.0.0.1 to 0.0.0.0 in config file
-  Config file: /etc/mongod.conf
-
-    then restart the service
-
-    # systemctl restart mongod
-    Every Database needs the schema to be loaded for the application to work.
-    Download the schema and load it.
-
-  # curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
-
-  # cd /tmp
-  # unzip mongodb.zip
-  # cd mongodb-main
-  # mongo < catalogue.js
-  # mongo < users.js
+- name: Load schema-users
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/users.js"
+    idempotent: yes
