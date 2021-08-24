@@ -1,3 +1,22 @@
-- name: Print URL
-  debug:
-    msg: "{{URL}}"
+- name: Configure Redis Repos
+  yum:
+    name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+    state: present
+
+- name: Install Redis
+  yum:
+    name: redis
+    enablerepo: remi
+    state: present
+
+- name: Change Listen Address of Redis Config
+  ansible.builtin.replace:
+    path: /etc/redis.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Start Redis Service
+  systemd:
+    name: redis
+    enabled: yes
+    state: restarted
