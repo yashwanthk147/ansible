@@ -9,6 +9,6 @@
         msg: Hello
 
     - name: Condition on strings
-        when: URL != "yahoo.orm"
+        when: URL != "yahoo.org"
         debug:
           msg: Hello
