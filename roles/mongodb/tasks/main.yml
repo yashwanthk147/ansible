@@ -24,7 +24,7 @@
 - name: Download and Extract MongoDB content
   include_role:
     name: common
-    tasks_from: Download
+    tasks_from: download
 
 #community.mongodb.mongodb_shell
 - name: Load schema - Catalogue
