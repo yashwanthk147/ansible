@@ -14,7 +14,7 @@
 - name: Copy the extracted content
   copy:
     src: /tmp/catalogue-main/
-    dest: /home/roboshop/catalogue
+    dest: /home/roboshop/catalogue/
     remote_src: yes
      owner: roboshop   #root directory has to be set with permissions of roboshop user
      group: roboshop
