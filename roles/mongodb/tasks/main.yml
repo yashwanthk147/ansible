@@ -15,7 +15,7 @@
     replace: '0.0.0.0'
 
 - name: Start MongoDB service
-  systemd: mongodb
+  systemd: mongod
     name: started
 
 - name: Download and Extract MongoDB schema
@@ -24,13 +24,12 @@
     dest: /tmp
     remote_src: yes
 
-
-- name: Load schema - catalogue
+- name: Load schema - Catalogue
   community.mongodb.mongodb_shell:
     file: "/tmp/mongodb-main/catalogue.js"
     idempotent: yes
 
-- name: Load schema-users
+- name: Load schema-Users
   community.mongodb.mongodb_shell:
     file: "/tmp/mongodb-main/users.js"
     idempotent: yes
