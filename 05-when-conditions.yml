@@ -2,6 +2,7 @@
   hosts: localhost
   vars:
     URL: yahoo.com
+    a: 10
   tasks:
     - name: Condition on strings
       when: URL == "yahoo.org"
@@ -11,4 +12,9 @@
     - name: Condition on strings
       when: URL != "yahoo.org"
       debug:
-          msg: Hello
+        msg: Hello
+
+    - name: Condition on numbers
+      when: a != 10
+      debug:
+        msg: Hello
