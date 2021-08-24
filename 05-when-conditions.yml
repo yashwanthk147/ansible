@@ -4,6 +4,11 @@
     URL: yahoo.com
   tasks:
     - name: Condition on strings
-      when: URL == "yahoo.com"
+      when: URL == "yahoo.org"
       debug:
         msg: Hello
+
+#    - name: Condition on strings
+#        when: URL != "yahoo.com"
+#        debug:
+#          msg: Hello
