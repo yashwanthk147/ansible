@@ -26,7 +26,7 @@
     state: latest
   become_user: roboshop   #Now i'm root user and become a roboshop user and setup these using become_user
 
-- name: Update sysstemD Configuration
+- name: Update systemD Configuration
   copy:
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
