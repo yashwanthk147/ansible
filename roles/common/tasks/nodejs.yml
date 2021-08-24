@@ -33,7 +33,7 @@
 
 - name: Restart {{COMPONENT}} Service
   systemd:
-    name: {{COMPONENT}}   #hardcoded value we are parametrizing with component
+    name: "{{COMPONENT}}"  #hardcoded value we are parametrizing with component
     state: restarted
     enabled: yes
     daemon_reload: yes
