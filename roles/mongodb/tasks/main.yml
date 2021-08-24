@@ -1,4 +1,4 @@
-- name: Create a MongoDb repo
+- name: Create a MongoDB repo
   copy:
     src: mongo.repo
     dest: /etc/yum.repos.d/mongodb.repo
