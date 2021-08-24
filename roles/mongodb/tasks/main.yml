@@ -8,6 +8,7 @@
     name: mongodb-org
     state: present
 
+#replace a string and update address
 - name: Update MongoDB Listen Address
   ansible.builtin.replace:
     path: /etc/mongod.conf
@@ -25,6 +26,7 @@
     dest: /tmp
     remote_src: yes
 
+#community.mongodb.mongodb_shell
 - name: Load schema - Catalogue
   community.mongodb.mongodb_shell:
     file: "/tmp/mongodb-main/catalogue.js"
