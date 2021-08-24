@@ -18,3 +18,13 @@
       when: a != 10
       debug:
         msg: Hello
+
+    - name: Run if variable B is defined
+      when: B is not defined
+      debug:
+        msg: Hello
+
+    - name: Run if variable B is defined and a is greater than 10
+      when: B is defined and a >= 10
+      debug:
+        msg: Hello
