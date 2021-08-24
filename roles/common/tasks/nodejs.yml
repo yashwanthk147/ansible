@@ -1,0 +1,37 @@
+- name: Install NodeJS
+  yum:    #yum mmodule supports multiple pacakges and we list
+    name: ["nodejs", "make", "gcc-c++"]
+    state: present
+
+- name: Add RoboShop Application User
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Download from Github
+  include_tasks:
+    file: download.yml  #will decide wher to download the file
+
+- name: Copy the extracted content
+  copy:
+    src: /tmp/catalogue-main/
+    dest: /home/roboshop/catalogue
+    remote_src: yes
+     owner: roboshop   #root directory has to be set with permissions of roboshop user
+     group: roboshop
+
+#npm install should be running as roboshopuser, Now i'm root user and become a roboshop user and seup these
+- name: Install catalogue Dependencies
+  community.general.npm:
+    path: /home/roboshop/catalogue
+    state: latest
+  become_user: roboshop   #Now i'm root user and become a roboshop user and setup these using become_user
+
+#$ cd /home/roboshop/catalogue
+#$ npm install
+#NOTE: We need to update the IP address of MONGODB Server in systemd.service file. Replace MONGO_DNSNAME with IP address.
+#Now, lets set up the service with systemctl.
+#
+## mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+## systemctl daemon-reload
+## systemctl start catalogue
+## systemctl enable catalogue
