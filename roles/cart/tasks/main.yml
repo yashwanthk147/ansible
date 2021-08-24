@@ -1,5 +1,5 @@
 #Dynamically loads and executes a specified role as a task.
-- name: User Setup
+- name: Cart Setup
   include_role:
     name: common
     tasks_from: nodejs
