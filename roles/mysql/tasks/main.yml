@@ -17,6 +17,7 @@
 - name: Check the default Password
   shell: echo "show databases;" | mysql -uroot -pRoboShop@1
   register: default_mysql_check
+  ignore_errors: yes
 
 - name: Grab default password
   shell: grep 'A temporary password' /var/log/mysqld.log  | awk '{print $NF}'
