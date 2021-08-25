@@ -1,0 +1,5 @@
+#Dynamically loads and executes a specified role as a task.
+- name: Payment Setup
+  include_role:
+    name: common
+    tasks_from: python3
