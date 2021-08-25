@@ -1,19 +1,2 @@
-- name: Install Maven
-  yum:
-    name: maven
-    state: present
-
-- name: Download Github & Add App User
-  include_tasks:
-    file: download.yml
-
-- name: compile the packages
-  shell: mvn clean package && mv target/shipping-1.0.jar shipping.jar #i don't have module but i have a command to deal with that
-  args:
-      chdir: /home/roboshop/{{COMPONENT}}
-
-- name: Setup SystemD
-  include_tasks:
-    file: setupsystemd.file
 
 
