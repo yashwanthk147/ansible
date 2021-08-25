@@ -27,7 +27,7 @@
     tasks_from: download
 
 #community.mongodb.mongodb_shell
-- name: Load schema - Catalogue
+- name: Load schema
   community.mongodb.mongodb_shell:
     file: "/tmp/mongodb-main/{{item}}.js"
     idempotent: yes
