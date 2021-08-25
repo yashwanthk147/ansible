@@ -60,3 +60,10 @@
   tags: rabbitmq
   roles:
     - name: rabbitmq
+
+- name: Roboshop Shipping Setup
+  hosts: SHIPPING
+  become: yes
+  tags: shipping
+  roles:
+    - name: shipping
