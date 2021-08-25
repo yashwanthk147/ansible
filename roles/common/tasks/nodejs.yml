@@ -3,21 +3,10 @@
     name: ["nodejs", "make", "gcc-c++"]
     state: present
 
-- name: Add RoboShop Application User
-  ansible.builtin.user:
-    name: roboshop
-
-- name: Download from Github
+- name: Download Github & Add App User
   include_tasks:
     file: download.yml  #will decide wher to download the file
 
-- name: Copy the extracted content
-  copy:
-    src: /tmp/{{COMPONENT}}-main/
-    dest: /home/roboshop/{{COMPONENT}}/
-    remote_src: yes
-    owner: roboshop   #root directory has to be set with permissions of roboshop user
-    group: roboshop
 
 #npm install should be running as roboshopuser, Now i'm root user and become a roboshop user and seup these
 - name: Install {{COMPONENT}} Dependencies
@@ -26,14 +15,6 @@
     state: latest
   become_user: roboshop   #Now i'm root user and become a roboshop user and setup these using become_user
 
-- name: Update systemD Configuration
-  copy:
-    src: systemd.service
-    dest: /etc/systemd/system/{{COMPONENT}}.service
-
-- name: Restart {{COMPONENT}} Service
-  systemd:
-    name: "{{COMPONENT}}"  #hardcoded value we are parametrizing with component
-    state: restarted
-    enabled: yes
-    daemon_reload: yes
+- name: Setup SystemD
+  include_tasks:
+    file: setupsystemd.file

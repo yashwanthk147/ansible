@@ -1,3 +1,7 @@
+- name: Add RoboShop Application User
+  ansible.builtin.user:
+    name: roboshop
+
 - name: Download from Github
   include_tasks:
     file: download-from-github.yml
@@ -6,3 +10,16 @@
 
 #these download will decide you, where to go
 #download.yml should load another task file
+
+- name: Delete Old App Code
+  file:
+    path: /home/roboshop/{{COMPONENT}}/
+    state: absent
+
+- name: Copy the extracted content
+  copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
+    remote_src: yes
+    owner: roboshop   #root directory has to be set with permissions of roboshop user
+    group: roboshop
