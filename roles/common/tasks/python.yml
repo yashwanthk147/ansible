@@ -3,15 +3,14 @@
     name: ["python36", "gcc", "python3-devel"]
     state: present
 
-- name: Download Github & Add App User
+- name: Download App Code & Add App User
   include_tasks:
-    file: download.yml  #will decide wher to download the file
+    file: download.yml
 
-- name: Install Python Dependencies
+- name: Install Python Depencencies
   pip:
     requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
     executable: pip3
-
 - name: print
   debug:
     msg: "{{app_user}}"
