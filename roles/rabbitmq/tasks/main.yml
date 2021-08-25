@@ -4,7 +4,7 @@
     state: present
 
 - name: Install Yum repos Script
-  shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh
+  shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
 
 - name: Install RabbitMQ Server
   yum:
