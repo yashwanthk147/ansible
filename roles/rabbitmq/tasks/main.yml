@@ -3,8 +3,11 @@
     name:  https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm
     state: present
 
-- name: Yum repos Script
+- name: Install Yum repos Script
   shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh
+
+- name: Install RabbitMQ Server
+  yum:
     name: rabbitmq-server
     state: present
 
