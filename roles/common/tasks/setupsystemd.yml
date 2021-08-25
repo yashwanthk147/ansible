@@ -1,5 +1,5 @@
 - name: Update SystemD Configuration
-  template:
+  copy:
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
 
