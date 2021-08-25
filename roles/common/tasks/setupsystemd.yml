@@ -6,6 +6,6 @@
 - name: Restart {{COMPONENT}} Service
   systemd:
     name: "{{COMPONENT}}"
-    state: restarted
+    state: started
     enabled: yes
     daemon_reload: yes
