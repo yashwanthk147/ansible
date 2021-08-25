@@ -14,7 +14,7 @@
 
 - name: Delete Old App Code
   file:
-    path: /home/roboshop/{{COMPONENT}}/
+    path: /home/roboshop/{{COMPONENT}}
     state: absent
 
 - name: Copy the extracted content
