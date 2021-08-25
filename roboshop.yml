@@ -54,3 +54,9 @@
   roles:
     - name: shipping
 
+- name: Roboshop RabbitMQ Setup
+  hosts: RABBITMQ
+  become: yes
+  tags: rabbitmq
+  roles:
+    - name: rabbitmq
