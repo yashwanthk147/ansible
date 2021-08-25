@@ -1,26 +1,41 @@
-- name: Add RoboShop Application User
-  ansible.builtin.user:
-    name: roboshop
-  register: app_user
+- name: Install Python3
+  yum:
+    name: ["python36", "gcc", "python3-devel"]
+    state: present
 
-- name: Download from Github
+- name: Download App Code & Add App User
   include_tasks:
-    file: download-from-github.yml
+    file: download.yml
 
-#additional stepup for future
+- name: Install Python Depencencies
+  pip:
+    requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
+    executable: pip3
 
-#these download will decide you, where to go
-#download.yml should load another task file
+- name: Update INI file - USER ID
+  lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: "^uid"
+    line: "uid = {{app_user.uid}}"
 
-- name: Delete Old App Code
-  file:
-    path: /home/roboshop/{{COMPONENT}}/
-    state: absent
+- name: Update INI file - GROUP ID
+  lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: "^gid"
+    line: "gid = {{app_user.group}}"
 
-- name: Copy the extracted content
-  copy:
-    src: /tmp/{{COMPONENT}}-main/
-    dest: /home/roboshop/{{COMPONENT}}/
-    remote_src: yes
-    owner: roboshop   #root directory has to be set with permissions of roboshop user
-    group: roboshop
+- name: Setup SystemD
+  include_tasks:
+    file: setup-systemd.yml
+
+- name: Install Node Exporter
+  include_tasks:
+    file: node-exporter.yml
+
+- name: Install Node Exporter
+  include_tasks:
+    file: filebeat.yml
+  vars:
+    LOG_FILE: /var/log/{{COMPONENT}}.log
+    STRUCTURED: "false"
+    APP_TYPE: python
