@@ -67,3 +67,10 @@
   tags: shipping
   roles:
     - name: shipping
+
+- name: Roboshop Payment Setup
+  hosts: PAYMENT
+  become: yes
+  tags: payment
+  roles:
+    - name: payment
