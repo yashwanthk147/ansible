@@ -1,6 +1,6 @@
 - name: Install Python3
   yum:
-    name: ["python36" , "gcc" , "python3-devel"]
+    name: ["python36", "gcc", "python3-devel"]
     state: present
 
 - name: Download Github & Add App User
