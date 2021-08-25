@@ -1,11 +1,11 @@
 - name: Install NodeJS
-  yum:    #yum mmodule supports multiple pacakges and we list
-    name: ["nodejs", "make", "gcc-c++"]
+  yum:                                     #yum mmodule supports multiple pacakges and we list
+    name: [ "nodejs", "make", "gcc-c++" ]
     state: present
 
-- name: Download Github & Add App User
+- name: Download App Code & Add App User
   include_tasks:
-    file: download.yml  #will decide wher to download the file
+    file: download.yml     #will decide wher to download the file
 
 
 #npm install should be running as roboshopuser, Now i'm root user and become a roboshop user and seup these
@@ -13,7 +13,7 @@
   community.general.npm:
     path: /home/roboshop/{{COMPONENT}}
     state: latest
-  become_user: roboshop   #Now i'm root user and become a roboshop user and setup these using become_user
+  become_user: roboshop              #Now i'm root user and become a roboshop user and setup these using become_user
 
 - name: Setup SystemD
   include_tasks:
