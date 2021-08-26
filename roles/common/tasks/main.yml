@@ -5,4 +5,4 @@
     mode: u+rwx,g+rx,o+rx
 
 - name: Setup Hostname
-  shell: Set-hostname {{COMPONENT}}
+  shell: set-hostname {{COMPONENT}}
