@@ -5,13 +5,13 @@ resource "aws_instance" "instance" {
   vpc_security_group_ids = ["sg-0d4eef67aaa1df62d"]
 
   tags                   = {
-    Name                 = element(var.COMPONENTS, count.index)   # i want to pick the value from the above count and keep it in the name tag. by using element function with index number
+    Name                 = "${element(var.COMPONENTS, count.index)}-${var.ENV}"  # i want to pick the value from the above count and keep it in the name tag. by using element function with index number
   }
 }
 
 resource "aws_route53_record" "records" {
   count                 = local.LENGTH
-  name                  = element(var.COMPONENTS, count.index )
+  name                  = "${element(var.COMPONENTS, count.index)}-${var.ENV}"
   type                  = "A"
   zone_id               = "Z0503812D1634TD1MLB0"
   ttl                   = 300
@@ -30,5 +30,5 @@ resource "local_file" "inv-file" {
   .private_ip[4]}\n[REDIS]\n${aws_instance.instance.*.private_ip[3]}\n[RABBITMQ]\n${aws_instance.instance.*
   .private_ip[2]}\n[MONGODB]\n${aws_instance.instance.*.private_ip[1]}\n[MYSQL]\n${aws_instance.instance.*
   .private_ip[0]}\n"
-  filename = "/tmp/inv-roboshop"
+  filename = "/tmp/inv-roboshop-${var.ENV}"
 }
