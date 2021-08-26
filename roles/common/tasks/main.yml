@@ -1,2 +1,8 @@
+- name: Copy Hostname
+  copy:
+    src: set-hostname.sh
+    dest: /bin/set-hostname
+    mode: u+rwx,g+rx,o+rx
+
 - name: Setup Hostname
   shell: Set-hostname {{COMPONENT}}
