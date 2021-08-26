@@ -5,13 +5,13 @@ resource "aws_instance" "instance" {
   vpc_security_group_ids = ["sg-0d4eef67aaa1df62d"]
 
   tags                   = {
-    Name                 = "${element(var.COMPONENTS, count.index)}-${var.ENV}"  # i want to pick the value from the above count and keep it in the name tag. by using element function with index number
+    Name                 = element(var.COMPONENTS, count.index) # i want to pick the value from the above count and keep it in the name tag. by using element function with index number
   }
 }
 
 resource "aws_route53_record" "records" {
   count                 = local.LENGTH
-  name                  = "${element(var.COMPONENTS, count.index)}-${var.ENV}"
+  name                  = element(var.COMPONENTS, count.index)
   type                  = "A"
   zone_id               = "Z0503812D1634TD1MLB0"
   ttl                   = 300
