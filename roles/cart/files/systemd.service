@@ -9,4 +9,3 @@ SyslogIdentifier=cart
 
 [Install]
 WantedBy=multi-user.target
-##fuck you
