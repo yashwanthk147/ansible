@@ -1,4 +1,4 @@
-- name: Copy Hostname
+- name: Copy Hostname Script
   copy:
     src: set-hostname.sh
     dest: /bin/set-hostname
