@@ -30,5 +30,5 @@ resource "local_file" "inv-file" {
   .private_ip[4]}\n[REDIS]\n${aws_instance.instance.*.private_ip[3]}\n[RABBITMQ]\n${aws_instance.instance.*
   .private_ip[2]}\n[MONGODB]\n${aws_instance.instance.*.private_ip[1]}\n[MYSQL]\n${aws_instance.instance.*
   .private_ip[0]}\n"
-  filename = "/tmp/inv-roboshop-${var.ENV}"
+  filename = "/tmp/inv-roboshop"
 }
