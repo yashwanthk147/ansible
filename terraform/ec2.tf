@@ -15,7 +15,7 @@ resource "aws_route53_record" "records" {
   type                  = "A"
   zone_id               = "Z0503812D1634TD1MLB0"
   ttl                   = 300
-  records               = [element(aws_instance.instance.*.private_ip, count.index)]
+  records               = element(aws_instance.instance.*.private_ip, count.index)
 }
 
 locals {
