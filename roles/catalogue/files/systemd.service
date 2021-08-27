@@ -2,7 +2,7 @@
 Description = Catalogue Service
 [Service]
 User=roboshop
-Environment=MONGO_URL="mongodb://mongodb.roboshop.internal:27017/catalogue"
+Environment=MONGO_URL="mongodb://mongodb-{{ENV}}.roboshop.internal:27017/catalogue"
 ExecStart=/bin/node /home/roboshop/catalogue/server.js
 SyslogIdentifier=catalogue
 
