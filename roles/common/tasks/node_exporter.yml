@@ -1,8 +1,20 @@
-- name: Check node exporter does exist
+- name: Check node exporter does exist  #if directory doesn't exists it is going to be true
   stat:
     path: /opt/node_exporter
   register: out
 
-- name: debug
-  debug:
-    msg: "{{out}}"
+- name: Install Node Exporter
+  when: not out.stat.exists   #if it is true running these next steps
+  block:
+    - name: Download Prometheus Archive
+      unarchive:
+        src:
+        dest: /tmp
+        remote_src: yes
+
+    - name: Copy Node Exporter to /opt
+      copy:
+        src: /tmp/{{ NODE_EXPORTER_URL | split('/') | last | regex_replace('.tar.gaz', '') }}
+        dest: /opt/node_exporter
+        remote_src: yes
+
