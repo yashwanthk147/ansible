@@ -1,0 +1,8 @@
+- name: Check node exporter does exist
+  stat:
+    path: /opt/node_exporter
+  register: out
+
+- name: debug
+  debug:
+    msg: "{{out}}"
