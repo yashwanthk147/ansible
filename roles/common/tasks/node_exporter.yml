@@ -8,7 +8,7 @@
   block:
     - name: Download Prometheus Archive
       unarchive:
-        src:
+        src: "{{NODE_EXPORTER_URL}}"
         dest: /tmp
         remote_src: yes
 
